@@ -49,3 +49,21 @@ function getCatName($catId)
 function isYesNo($str){
     return $str ? '是': '否';
 }
+
+/**
+ *
+ * 通用的json返回
+ * @param $status
+ * @param $message
+ * @param array $data
+ * @param int $httpcode
+ * @return \think\response\Json
+ */
+function show($status, $message, $data = [], $httpcode = 200){
+    $result = [
+        'status' => $status,
+        'message' => $message,
+        'data' => $data
+    ];
+    return json($result, $httpcode);
+}
