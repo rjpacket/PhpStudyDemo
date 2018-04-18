@@ -24,19 +24,19 @@ class News extends Base
         return $result;
     }
 
-    public function getNewsByCondition($param = []){
+    public function getNewsByCondition($condition = [], $from = 0, $size = 5){
         $condition['status'] = [
             'neq', config('code.status_delete')
         ];
 
         $order = ['id' => 'desc'];
 
-        $from = ($param['page'] - 1) * $param['size'];
-
         $result = $this -> where($condition)
-            -> limit($from, $param['size'])
+            -> limit($from, $size)
             -> order($order)
             -> select();
+
+//        echo $this -> getLastSql();
 
         return $result;
     }
