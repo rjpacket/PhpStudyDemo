@@ -1,9 +1,10 @@
 <?php
 namespace app\api\controller;
 
+use app\common\lib\exception\ApiException;
 use think\Controller;
 
-class Test extends Controller
+class Test extends Common
 {
     public function index()
     {
@@ -14,6 +15,7 @@ class Test extends Controller
         ];
     }
 
+
     public function update($id = 0)
     {
         $id = input('put.id');
@@ -21,8 +23,11 @@ class Test extends Controller
     }
 
     public function save(){
-        model("ssss");
-        exit;
+        $data = input('post.');
+        if($data['mt'] != 1){
+//            exception("您提交的数据不合法");
+            throw new ApiException('您提交的数据不合法欧', 403);
+        }
         return show(1, "ok", input('post.'), 200);
     }
 }

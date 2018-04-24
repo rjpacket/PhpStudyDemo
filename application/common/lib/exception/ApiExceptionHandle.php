@@ -15,6 +15,12 @@ class ApiExceptionHandle extends Handle
 
     public function render(\Exception $e)
     {
+        if(config("app_debug")){
+            return parent::render($e);
+        }
+        if($e instanceof ApiException){
+            $this->httpcode = $e ->httpcode;
+        }
         return show(0, $e->getMessage(), [], $this->httpcode);
     }
 }

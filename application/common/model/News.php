@@ -25,9 +25,11 @@ class News extends Base
     }
 
     public function getNewsByCondition($condition = [], $from = 0, $size = 5){
-        $condition['status'] = [
-            'neq', config('code.status_delete')
-        ];
+        if(!isset($condition['status'])) {
+            $condition['status'] = [
+                'neq', config('Code.status_delete')
+            ];
+        }
 
         $order = ['id' => 'desc'];
 
@@ -47,14 +49,54 @@ class News extends Base
      * @param array $param
      * @return false|\PDOStatement|string|\think\Collection
      */
-    public function getNewsCountByCondition($param = []){
-        $condition['status'] = [
-            'neq', config('code.status_delete')
-        ];
+    public function getNewsCountByCondition($condition = []){
+        if(!isset($condition['status'])) {
+            $condition['status'] = [
+                'neq', config('code.status_delete')
+            ];
+        }
 
         $count = $this -> where($condition)
             -> count();
 
         return $count;
+    }
+
+    /**
+     * 获取首页头图
+     * @param int $num
+     */
+    public function getIndexHeadNormalNews($num = 4){
+        $data = [
+            'status' => 1,
+            'is_head_figure' => 1
+        ];
+
+        $order = [
+            'id' => 'desc'
+        ];
+
+        return $this -> where($data)
+            -> field(['id', 'catid', 'image', 'title'])
+            -> order($order)
+            -> limit($num)
+            -> select();
+    }
+
+    public function getPositionNormalNews($num = 20){
+        $data = [
+            'status' => 1,
+            'is_position' => 0
+        ];
+
+        $order = [
+            'id' => 'desc'
+        ];
+
+        return $this -> where($data)
+            -> field(['id', 'catid', 'image', 'title'])
+            -> order($order)
+            -> limit($num)
+            -> select();
     }
 }

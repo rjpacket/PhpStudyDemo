@@ -19,3 +19,10 @@ Route::put('test/:id', 'api/test/update');
 Route::delete('test/:id', 'api/test/delete');
 
 Route::resource('test', 'api/test');
+
+Route::get('api/:ver/cat', 'api/:ver.cat/read');
+
+Route::get('api/:ver/index', 'api/:ver.index/index');
+
+Route::resource('api/:ver/news', 'api/:ver.news');
+
