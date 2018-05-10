@@ -24,5 +24,20 @@ Route::get('api/:ver/cat', 'api/:ver.cat/read');
 
 Route::get('api/:ver/index', 'api/:ver.index/index');
 
+Route::get('api/:ver/init', 'api/:ver.index/init');
+
 Route::resource('api/:ver/news', 'api/:ver.news');
+
+//短信验证码
+Route::resource('api/:ver/identify', 'api/:ver.identify');
+
+//登录路由
+Route::post('api/:ver/login', 'api/:ver.login/save');
+
+Route::resource('api/:ver/user', 'api/:ver.user');
+
+Route::post('api/:ver/image', 'api/:ver.image/save');
+
+//点赞
+Route::post('api/:ver/upvote', 'api/:ver.upvote/save');
 

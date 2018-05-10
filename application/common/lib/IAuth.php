@@ -70,4 +70,14 @@ class IAuth
 
         return true;
     }
+
+    /**
+     * 设置登录token
+     * @param string $phone
+     */
+    public static function setAppLoginToken($phone = ''){
+        $str = md5(uniqid(md5(microtime(true)),true));
+        $str = sha1($str.$phone);
+        return $str;
+    }
 }

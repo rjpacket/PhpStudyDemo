@@ -14,5 +14,6 @@ return [
         "android"
     ],
     'app_sign_time' => 300,
-    'app_sign_cache_time' => 600
+    'app_sign_cache_time' => 600,
+    'login_time_out_day' => 7
 ];

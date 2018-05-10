@@ -18,7 +18,7 @@ use think\Controller;
 class Common extends Controller
 {
 
-    private $headers = '';
+    public $headers = '';
 
     //控制器的page size
     public $page = 1;

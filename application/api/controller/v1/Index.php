@@ -24,4 +24,23 @@ class Index extends Common
 
        return show(1, "ok", $result, 200);
     }
+
+    /**
+     * 客户端初始化接口
+     */
+    public function init(){
+        $ver = model('Version') -> getLastNormalVersionByAppType($this->headers['app_type']);
+//        halt($ver);
+        if(empty($ver)){
+            return new ApiException('error', 404);
+        }
+
+        if($ver->version  > $this -> headers['version']){
+            $ver -> is_update = 1;
+        }else{
+            $ver -> is_update = 0;
+        }
+
+        return show(1, "OK", $ver, 200);
+    }
 }
